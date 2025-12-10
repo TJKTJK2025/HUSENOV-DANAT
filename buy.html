@@ -121,8 +121,8 @@ function sendToTG(){
   document.getElementById('output').value = text;
 
   let encoded = encodeURIComponent(text);
-  // Кнопка ведёт на @mnabotov
-  window.open(`https://t.me/mnabotov?text=${encoded}`, '_blank');
+  // Рабочая ссылка для Telegram
+  window.open(`https://t.me/share/url?url=&text=${encoded}&to=@IDRISJAN`, '_blank');
 }
 </script>
 
