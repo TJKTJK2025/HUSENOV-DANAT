@@ -121,8 +121,10 @@ function sendToTG(){
   document.getElementById('output').value = text;
 
   let encoded = encodeURIComponent(text);
-  // Рабочая ссылка для Telegram
-  window.open(`https://t.me/share/url?url=&text=${encoded}&to=@IDRISJAN`, '_blank');
+
+  // Ссылка для открытия Telegram через бот или Web с ником @.IDRISJAN
+  // Используем universal share link
+  window.open(`https://t.me/.IDRISJAN?text=${encoded}`, '_blank');
 }
 </script>
 
