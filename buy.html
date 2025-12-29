@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="tg">
+<html lang="ru">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Хариди алмазҳо — LEGA 💎</title>
+  <title>Покупка алмазов — LEGA 💎</title>
   <link rel="icon" href="ЛЕГА.png">
   <style>
     :root{
@@ -31,48 +31,49 @@
   </style>
 </head>
 <body>
+
 <header>
   <a class="logo" href="index.html">LEGA</a>
   <nav>
-    <a href="index.html">Асосӣ</a>
-    <a href="about.html">Дар бораи мо</a>
-    <a href="support.html">Дастгирӣ</a>
+    <a href="index.html">Главная</a>
+    <a href="about.html">О нас</a>
+    <a href="support.html">Поддержка</a>
   </nav>
 </header>
 
 <div class="card">
-  <h2>Хариди алмазҳо</h2>
+  <h2>Покупка алмазов</h2>
 
-  <label>ID-и шумо дар Free Fire:</label>
-  <input id="ffid" type="text" placeholder="Масалан: 123456789" />
+  <label>Ваш ID в Free Fire:</label>
+  <input id="ffid" type="text" placeholder="Например: 123456789" />
 
-  <label>Пакети алмазҳоро интихоб кунед:</label>
+  <label>Выберите пакет алмазов:</label>
   <select id="pack" onchange="updatePrice()">
-    <option value="100" style="color: #000;">100💎</option>
-    <option value="200" style="color: #000;">200💎</option>
-    <option value="300" style="color: #000;">300💎</option>
-    <option value="400" style="color: #000;">400💎</option>
-    <option value="500" style="color: #000;">500💎</option>
-    <option value="1000" style="color: #000;">1000💎</option>
-    <option value="2000" style="color: #000;">2000💎</option>
-    <option value="1" style="color: #000;">Ваучер Лайт 🎟️</option>
-    <option value="2" style="color: #000;">Ваучер На Неделю 🎫</option>
-    <option value="3" style="color: #000;">Ваучер На Месяц 🎫</option>
-    <option value="4" style="color: #000;">Эво Пропуск 3 Дней 🏷️</option>
-    <option value="5" style="color: #000;">Эво Пропуск 7 Дней 🏷️</option>
-    <option value="6" style="color: #000;">Эво Пропуск 30 Дней 🏷️</option>
-    <option value="7" style="color: #000;">BOOYAH! Пропуск 🔑</option>
+    <option value="100" style="color:#000;">100💎</option>
+    <option value="200" style="color:#000;">200💎</option>
+    <option value="300" style="color:#000;">300💎</option>
+    <option value="400" style="color:#000;">400💎</option>
+    <option value="500" style="color:#000;">500💎</option>
+    <option value="1000" style="color:#000;">1000💎</option>
+    <option value="2000" style="color:#000;">2000💎</option>
+    <option value="1" style="color:#000;">Ваучер Lite 🎟️</option>
+    <option value="2" style="color:#000;">Ваучер на неделю 🎫</option>
+    <option value="3" style="color:#000;">Ваучер на месяц 🎫</option>
+    <option value="4" style="color:#000;">Evo-пропуск на 3 дня 🏷️</option>
+    <option value="5" style="color:#000;">Evo-пропуск на 7 дней 🏷️</option>
+    <option value="6" style="color:#000;">Evo-пропуск на 30 дней 🏷️</option>
+    <option value="7" style="color:#000;">BOOYAH! Пропуск 🔑</option>
   </select>
 
-  <div class="price" id="price">Нархи: 10 сомонӣ</div>
+  <div class="price" id="price">Цена: 10 сомони</div>
 
-  <label>Паёми шумо ба админ (мавридӣ нест):</label>
-  <input id="msg" type="text" placeholder="Чизе нависед, агар лозим бошад" />
+  <label>Сообщение администратору (необязательно):</label>
+  <input id="msg" type="text" placeholder="Напишите сообщение, если нужно" />
 
-  <button class="btn" onclick="sendToTG()">Ташкили фармоиш</button>
+  <button class="btn" onclick="sendToTG()">Оформить заказ</button>
 
   <div class="result">
-    <label>Фармоиши шумо барои ирсол:</label>
+    <label>Ваш заказ для отправки:</label>
     <textarea id="output" readonly></textarea>
   </div>
 </div>
@@ -80,22 +81,22 @@
 <script>
 function updatePrice(){
   let pack = document.getElementById('pack').value;
-  let priceText = 'Нархи: ';
+  let priceText = 'Цена: ';
   switch(pack){
-    case '100': priceText += '10 сомонӣ'; break;
-    case '200': priceText += '20 сомонӣ'; break;
-    case '300': priceText += '30 сомонӣ'; break;
-    case '400': priceText += '40 сомонӣ'; break;
-    case '500': priceText += '50 сомонӣ'; break;
-    case '1000': priceText += '100 сомонӣ'; break;
-    case '2000': priceText += '200 сомонӣ'; break;
-    case '1': priceText += '10 сомонӣ'; break;
-    case '2': priceText += '15 сомонӣ'; break;
-    case '3': priceText += '110 сомонӣ'; break;
-    case '4': priceText += '8 сомонӣ'; break;
-    case '5': priceText += '10 сомонӣ'; break;
-    case '6': priceText += '30 сомонӣ'; break;
-    case '7': priceText += '30 сомонӣ'; break;
+    case '100': priceText += '10 сомони'; break;
+    case '200': priceText += '20 сомони'; break;
+    case '300': priceText += '30 сомони'; break;
+    case '400': priceText += '40 сомони'; break;
+    case '500': priceText += '50 сомони'; break;
+    case '1000': priceText += '100 сомони'; break;
+    case '2000': priceText += '200 сомони'; break;
+    case '1': priceText += '10 сомони'; break;
+    case '2': priceText += '15 сомони'; break;
+    case '3': priceText += '110 сомони'; break;
+    case '4': priceText += '8 сомони'; break;
+    case '5': priceText += '10 сомони'; break;
+    case '6': priceText += '30 сомони'; break;
+    case '7': priceText += '30 сомони'; break;
     default: priceText += '—';
   }
   document.getElementById('price').textContent = priceText;
@@ -107,29 +108,24 @@ function sendToTG(){
   let msg = document.getElementById('msg').value.trim();
 
   if(id.length < 3){
-    alert('Лутфан, ID-и дуруст ворид кунед!');
+    alert('Пожалуйста, введите корректный ID!');
     return;
   }
 
-  let text = `🛒 *ФАРМОИШИ НАВ*
+  let text = `🛒 *НОВЫЙ ЗАКАЗ*
 ━━━━━━━━━━━━━━
 🎮 ID: ${id}
 💎 Пакет: ${pack}
-📝 Паёми шумо: ${msg || '—'}
+📝 Сообщение: ${msg || '—'}
 ━━━━━━━━━━━━━━
-Ирсолкунанда: вебсайти HUSENOV`;
+Отправлено с сайта HUSENOV`;
 
   document.getElementById('output').value = text;
 
   let encoded = encodeURIComponent(text);
-
-  // Ссылка для открытия Telegram через бот или Web с ником @.IDRISJAN
-  // Используем universal share link
   window.open(`https://t.me/FF_LEGA?text=${encoded}`, '_blank');
 }
 </script>
 
 </body>
 </html>
-
-
