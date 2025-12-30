@@ -69,66 +69,69 @@
     .title::after{content:"";display:block;height:6px;width:120px;background:linear-gradient(90deg,transparent,var(--neon-2),transparent);margin-top:12px;border-radius:6px;animation:glow 2.6s infinite}
     @keyframes glow{0%{opacity:0.15;transform:translateX(-10px)}50%{opacity:1;transform:translateX(0)}100%{opacity:0.15;transform:translateX(10px)}}
     <style>
-    .btn-orbit{
+    /* 🔥 FIRE ORBIT BUTTON */
+.btn-orbit{
   position: relative;
   display: inline-block;
   padding: 18px 46px;
   font-size: 1.25rem;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 2px;
   text-transform: uppercase;
   color:#fff;
   text-decoration:none;
   border-radius:60px;
-  background:#07030a;
+  background:#09040c;
   overflow:hidden;
   z-index:1;
   box-shadow:
-    0 0 18px rgba(255,60,0,.6),
-    0 0 45px rgba(255,0,0,.35);
+    0 0 25px rgba(255,80,0,.7),
+    0 0 70px rgba(255,0,0,.4);
   transition: transform .25s ease, box-shadow .25s ease;
 }
 
-/* 🔄 ВРАЩАЮЩЕЕСЯ НЕОНОВОЕ КОЛЬЦО */
+/* 🔄🔥 ОГНЕННОЕ ВРАЩАЮЩЕЕСЯ КОЛЬЦО */
 .btn-orbit::before{
   content:"";
   position:absolute;
-  inset:-4px;
+  inset:-6px;
   border-radius:inherit;
   background:conic-gradient(
-    transparent 0%,
-    #ff2a00 20%,
-    #ff9900 40%,
-    #ff2a00 60%,
-    transparent 80%
+    from 0deg,
+    #ff2a00,
+    #ff7a00,
+    #ffd000,
+    #ff7a00,
+    #ff2a00
   );
-  animation: orbit 4s linear infinite;
+  animation: fireSpin 3.5s linear infinite;
+  filter: blur(2px);
   z-index:-1;
-  filter:blur(1.2px);
 }
 
 /* ВНУТРЕННИЙ СЛОЙ */
 .btn-orbit::after{
   content:"";
   position:absolute;
-  inset:3px;
-  background:#07030a;
+  inset:4px;
+  background:#09040c;
   border-radius:inherit;
   z-index:-1;
 }
 
-/* ⚡ УСКОРЕНИЕ + МОЩНЫЙ СВЕТ */
+/* ⚡ УСКОРЕНИЕ + ВЗРЫВ СВЕТА */
 .btn-orbit:hover{
-  transform: scale(1.12);
+  transform: scale(1.14);
   box-shadow:
-    0 0 30px #ff9900,
-    0 0 90px #ff3300;
+    0 0 40px #ffd000,
+    0 0 120px #ff3300;
 }
 .btn-orbit:hover::before{
-  animation-duration: .9s; /* ускорение */
+  animation-duration:.8s;
+  filter: blur(3px);
 }
 
-/* 🌀 GLITCH ТЕКСТ */
+/* 🌀 GLITCH */
 .glitch{
   position:relative;
 }
@@ -140,137 +143,39 @@
   top:0;
   width:100%;
   text-align:center;
-  color:#fff;
-  background:transparent;
-  overflow:hidden;
   pointer-events:none;
 }
 
 .glitch::before{
-  text-shadow:-2px 0 #ff004c;
-  animation:glitch1 2.2s infinite linear alternate-reverse;
+  color:#ff003c;
+  animation:glitchFire1 2.2s infinite linear alternate-reverse;
 }
 
 .glitch::after{
-  text-shadow:2px 0 #00fff9;
-  animation:glitch2 2.8s infinite linear alternate-reverse;
+  color:#00fff9;
+  animation:glitchFire2 2.6s infinite linear alternate-reverse;
 }
 
-@keyframes orbit{
+/* 🔥 KEYFRAMES */
+@keyframes fireSpin{
   from{transform:rotate(0deg)}
   to{transform:rotate(360deg)}
 }
 
-/* GLITCH KEYFRAMES */
-@keyframes glitch1{
+@keyframes glitchFire1{
   0%{clip-path:inset(0 0 90% 0)}
-  20%{clip-path:inset(10% 0 80% 0)}
-  40%{clip-path:inset(30% 0 50% 0)}
-  60%{clip-path:inset(50% 0 30% 0)}
-  80%{clip-path:inset(80% 0 10% 0)}
-  100%{clip-path:inset(0 0 90% 0)}
+  30%{clip-path:inset(20% 0 60% 0)}
+  60%{clip-path:inset(40% 0 30% 0)}
+  100%{clip-path:inset(0 0 85% 0)}
 }
 
-@keyframes glitch2{
+@keyframes glitchFire2{
   0%{clip-path:inset(80% 0 0 0)}
-  20%{clip-path:inset(60% 0 20% 0)}
-  40%{clip-path:inset(40% 0 40% 0)}
+  30%{clip-path:inset(50% 0 20% 0)}
   60%{clip-path:inset(20% 0 60% 0)}
-  80%{clip-path:inset(0 0 80% 0)}
-  100%{clip-path:inset(80% 0 0 0)}
+  100%{clip-path:inset(75% 0 0 0)}
 }
 
-.btn-dynamic {
-  position: relative;
-  margin-top: 35px;
-  padding: 16px 42px;
-  font-size: 1.2rem;
-  color: #fff;
-  text-decoration: none;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  font-family: 'Orbitron', sans-serif;
-  border-radius: 60px;
-  background: linear-gradient(90deg, #ff2a00, #ff9900, #ff2a00);
-  background-size: 300%;
-  box-shadow:
-    0 0 15px #ff6600,
-    0 0 40px #ff3300;
-  animation: gradientMove 3s infinite linear;
-  overflow: hidden;
-  transition: 0.3s;
-}
-
-.btn-dynamic:hover {
-  transform: scale(1.12);
-  box-shadow:
-    0 0 25px #ff9900,
-    0 0 60px #ff3300;
-}
-
-/* НЕОНОВЫЕ ЛИНИИ */
-.btn-dynamic span {
-  position: absolute;
-  display: block;
-}
-
-.btn-dynamic span:nth-child(1) {
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #fff);
-  animation: line1 1.5s infinite;
-}
-
-.btn-dynamic span:nth-child(2) {
-  right: 0;
-  top: -100%;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(180deg, transparent, #fff);
-  animation: line2 1.5s infinite 0.3s;
-}
-
-.btn-dynamic span:nth-child(3) {
-  bottom: 0;
-  right: -100%;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(270deg, transparent, #fff);
-  animation: line3 1.5s infinite 0.6s;
-}
-
-.btn-dynamic span:nth-child(4) {
-  left: 0;
-  bottom: -100%;
-  width: 2px;
-  height: 100%;
-  background: linear-gradient(360deg, transparent, #fff);
-  animation: line4 1.5s infinite 0.9s;
-}
-
-@keyframes gradientMove {
-  0% { background-position: 0%; }
-  100% { background-position: 300%; }
-}
-
-@keyframes line1 {
-  0% { left: -100%; }
-  100% { left: 100%; }
-}
-@keyframes line2 {
-  0% { top: -100%; }
-  100% { top: 100%; }
-}
-@keyframes line3 {
-  0% { right: -100%; }
-  100% { right: 100%; }
-}
-@keyframes line4 {
-  0% { bottom: -100%; }
-  100% { bottom: 100%; }
-}
 </style>
 
   </style>
@@ -334,6 +239,7 @@
   </script>
 </body>
 </html>
+
 
 
 
