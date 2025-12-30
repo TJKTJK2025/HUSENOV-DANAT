@@ -1,55 +1,101 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IMADJI BENZO ТОП-1</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LEGA DANAT — Free Fire</title>
+<link rel="icon" href="ЛЕГА.png">
 
 <style>
-/* ===== RESET ===== */
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, Helvetica, sans-serif;
-}
-
-/* ===== BODY ===== */
+/* ===== BASE ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
 body{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:radial-gradient(circle at top, #160000, #000);
-  overflow:hidden;
+  background:radial-gradient(circle at top,#160000,#050000,#000);
   color:#fff;
+  min-height:100vh;
+}
+a{text-decoration:none;color:inherit}
+
+/* ===== HEADER ===== */
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 30px;
+}
+.logo{
+  font-weight:900;
+  letter-spacing:2px;
+  color:#ff2d55;
+  font-size:22px;
+}
+nav a{
+  margin-left:18px;
+  padding:8px 14px;
+  border-radius:10px;
+  transition:.2s;
+}
+nav a:hover{
+  background:rgba(255,255,255,.06);
 }
 
-/* ===== BUTTON ===== */
+/* ===== HERO ===== */
+.hero{
+  text-align:center;
+  padding:80px 20px;
+}
+.hero h1{
+  font-size:3rem;
+  color:#ffcc00;
+  text-shadow:0 0 20px #ff3300;
+}
+.hero p{
+  margin-top:12px;
+  opacity:.85;
+}
+
+/* ===== BUTTONS ===== */
+.buttons{
+  margin-top:35px;
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  flex-wrap:wrap;
+}
+
+/* ----- BUY BUTTON ----- */
+.btn-buy{
+  padding:16px 32px;
+  border-radius:14px;
+  background:linear-gradient(90deg,#ff2d55,#ff6b6b);
+  font-weight:700;
+  box-shadow:0 0 25px rgba(255,45,85,.6);
+  transition:.25s;
+}
+.btn-buy:hover{
+  transform:scale(1.08);
+  box-shadow:0 0 45px rgba(255,45,85,.9);
+}
+
+/* ===== FIRE ORBIT BUTTON ===== */
 .btn-orbit{
   position:relative;
-  padding:22px 56px;
-  font-size:1.35rem;
+  padding:20px 52px;
+  border-radius:70px;
+  background:#080000;
   font-weight:900;
   letter-spacing:2px;
   text-transform:uppercase;
-  color:#fff;
-  text-decoration:none;
-  border-radius:70px;
-  background:#080000;
   overflow:hidden;
-  z-index:2;
-  box-shadow:
-    0 0 30px rgba(255,90,0,.8),
-    0 0 100px rgba(255,0,0,.45);
-  transition:transform .25s ease, box-shadow .25s ease;
+  box-shadow:0 0 30px rgba(255,80,0,.8);
+  transition:.25s;
 }
 
-/* 🔥 FIRE ROTATION */
+/* FIRE RING */
 .btn-orbit::before{
   content:"";
   position:absolute;
-  inset:-10px;
+  inset:-8px;
   border-radius:inherit;
   background:conic-gradient(
     #ff2400,
@@ -58,12 +104,10 @@ body{
     #ff7a00,
     #ff2400
   );
-  animation:fireSpin 3.5s linear infinite;
+  animation:spin 3s linear infinite;
   filter:blur(3px);
   z-index:-2;
 }
-
-/* INNER BACKGROUND */
 .btn-orbit::after{
   content:"";
   position:absolute;
@@ -73,21 +117,17 @@ body{
   z-index:-1;
 }
 
-/* ⚡ HOVER BOOST */
+/* SPEED UP */
 .btn-orbit:hover{
   transform:scale(1.15);
-  box-shadow:
-    0 0 60px #ffd000,
-    0 0 180px #ff2a00;
+  box-shadow:0 0 80px #ff7a00;
 }
 .btn-orbit:hover::before{
   animation-duration:.7s;
 }
 
-/* ===== GLITCH ===== */
-.glitch{
-  position:relative;
-}
+/* GLITCH */
+.glitch{position:relative}
 .glitch::before,
 .glitch::after{
   content:attr(data-text);
@@ -98,83 +138,89 @@ body{
 }
 .glitch::before{
   color:#ff003c;
-  animation:glitch1 2s infinite linear alternate-reverse;
+  animation:g1 2s infinite alternate-reverse;
 }
 .glitch::after{
   color:#00fff9;
-  animation:glitch2 2.4s infinite linear alternate-reverse;
+  animation:g2 2.4s infinite alternate-reverse;
 }
 
-/* ===== SMOKE ===== */
+/* SMOKE */
 .smoke{
   position:absolute;
   bottom:-60px;
   left:50%;
   width:160px;
   height:160px;
-  background:radial-gradient(circle, rgba(200,200,200,.35), transparent 70%);
-  filter:blur(30px);
-  animation:smokeUp 5s infinite ease-in-out;
-  z-index:0;
+  background:radial-gradient(circle,rgba(200,200,200,.35),transparent 70%);
+  filter:blur(35px);
+  animation:smoke 5s infinite;
 }
 
-/* ===== SPARKS ===== */
+/* SPARKS */
 .spark{
   position:absolute;
   width:4px;
   height:4px;
   background:#ffd000;
   border-radius:50%;
-  animation:sparkFly 1.6s infinite;
+  animation:spark 1.5s infinite;
 }
 
-/* ===== KEYFRAMES ===== */
-@keyframes fireSpin{
-  from{transform:rotate(0deg)}
-  to{transform:rotate(360deg)}
+/* ===== ANIMATIONS ===== */
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes smoke{
+  from{transform:translate(-50%,0) scale(.6);opacity:.4}
+  to{transform:translate(-50%,-200px) scale(1.4);opacity:0}
 }
-
-@keyframes smokeUp{
-  0%{transform:translate(-50%,0) scale(.6);opacity:.4}
-  100%{transform:translate(-50%,-200px) scale(1.4);opacity:0}
+@keyframes spark{
+  from{transform:translate(0,0);opacity:1}
+  to{transform:translate(var(--x),var(--y));opacity:0}
 }
-
-@keyframes sparkFly{
-  0%{transform:translate(0,0);opacity:1}
-  100%{transform:translate(var(--x), var(--y));opacity:0}
-}
-
-@keyframes glitch1{
+@keyframes g1{
   0%{clip-path:inset(0 0 80% 0)}
-  50%{clip-path:inset(30% 0 40% 0)}
-  100%{clip-path:inset(0 0 85% 0)}
+  100%{clip-path:inset(30% 0 40% 0)}
 }
-
-@keyframes glitch2{
+@keyframes g2{
   0%{clip-path:inset(80% 0 0 0)}
-  50%{clip-path:inset(40% 0 30% 0)}
-  100%{clip-path:inset(75% 0 0 0)}
+  100%{clip-path:inset(40% 0 30% 0)}
 }
 </style>
 </head>
 
 <body>
 
-<!-- 💨 SMOKE -->
-<div class="smoke"></div>
+<header>
+  <a class="logo" href="index.html">LEGA</a>
+  <nav>
+    <a href="buy.html">Купить</a>
+    <a href="about.html">О нас</a>
+    <a href="support.html">Помощь</a>
+  </nav>
+</header>
 
-<!-- 💥 SPARKS -->
-<div class="spark" style="--x:90px;--y:-140px;top:50%;left:50%"></div>
-<div class="spark" style="--x:-100px;--y:-120px;top:50%;left:50%"></div>
-<div class="spark" style="--x:130px;--y:-70px;top:50%;left:50%"></div>
-<div class="spark" style="--x:-140px;--y:-90px;top:50%;left:50%"></div>
+<section class="hero">
+  <h1>LEGA DANAT — Free Fire 💎</h1>
+  <p>Купи алмазы быстро и безопасно • Гарантия есть</p>
 
-<!-- 🔥 BUTTON -->
-<a href="imadji-benzo.html"
-   class="btn-orbit glitch"
-   data-text="IMADJI BENZO ТОП-1">
-   IMADJI BENZO ТОП-1
-</a>
+  <div class="buttons">
+    <!-- BUY -->
+    <a href="buy.html" class="btn-buy">Купить алмазы</a>
+
+    <!-- FIRE -->
+    <div style="position:relative">
+      <div class="smoke"></div>
+      <div class="spark" style="--x:120px;--y:-120px;top:50%;left:50%"></div>
+      <div class="spark" style="--x:-120px;--y:-100px;top:50%;left:50%"></div>
+
+      <a href="imadji-benzo.html"
+         class="btn-orbit glitch"
+         data-text="HAYMER Нажми! 🚀">
+         HAYMER Нажми! 🚀
+      </a>
+    </div>
+  </div>
+</section>
 
 </body>
 </html>
