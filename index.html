@@ -10,22 +10,37 @@
 /* ===== BASE ===== */
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Segoe UI,Roboto,Arial}
 body{
-  background:radial-gradient(circle at 10% 10%, rgba(255,45,85,0.03) 0%, transparent 10%), linear-gradient(180deg,#040207,#0b0710);
+  background:#040207;
   color:#e9e9e9;
   min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
 }
-a{text-decoration:none;color:inherit}
+
+/* ===== DYNAMIC FIRE BACKGROUND ===== */
+.fire-bg{
+  position:fixed;inset:0;z-index:-3;pointer-events:none;overflow:hidden;
+}
+.fire-bg .particle{
+  position:absolute;
+  width:6px;height:6px;
+  background:linear-gradient(45deg,#ff2a00,#ff7a00,#ffd000);
+  border-radius:50%;
+  filter:blur(2px);
+  animation:fly 5s linear infinite;
+  opacity:.6;
+}
 
 /* ===== HEADER ===== */
 header.site{
-  display:flex;justify-content:space-between;align-items:center;padding:18px 30px;
+  display:flex;justify-content:space-between;align-items:center;padding:18px 30px;position:relative;z-index:2
 }
 .logo{font-weight:900;letter-spacing:1px;color:#ff2d55;font-size:22px}
 nav.links a{margin-left:18px;color:rgba(255,255,255,0.85);padding:8px 12px;border-radius:8px;transition:.18s}
 nav.links a:hover{background:linear-gradient(90deg,rgba(255,45,85,0.06),rgba(255,107,107,0.03));transform:translateY(-2px)}
 
 /* ===== HERO ===== */
-.hero{display:flex;align-items:center;gap:40px;padding:60px 0;flex-wrap:wrap}
+.hero{display:flex;align-items:center;gap:40px;padding:60px 0;flex-wrap:wrap;position:relative;z-index:2}
 .hero-left{flex:1;min-width:280px}
 h1.title{font-size:44px;color:#ff2d55;text-shadow:0 6px 30px rgba(255,45,85,0.12),0 0 40px rgba(255,107,107,0.06)}
 p.lead{margin-top:12px;color:#9aa0a6;max-width:720px}
@@ -43,7 +58,6 @@ p.lead{margin-top:12px;color:#9aa0a6;max-width:720px}
 }
 .btn-buy:hover{transform:scale(1.08);box-shadow:0 0 45px rgba(255,45,85,.9)}
 
-/* ===== FIRE ORBIT BUTTON WITH DYNAMIC FIRE ===== */
 .btn-orbit{
   position:relative;
   padding:20px 50px;
@@ -102,18 +116,18 @@ p.lead{margin-top:12px;color:#9aa0a6;max-width:720px}
 }
 
 /* HERO RIGHT CARD */
-.hero-right{width:420px;max-width:40%;min-width:260px}
-.card-visual{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,0.03);position:relative;overflow:hidden}
+.hero-right{width:420px;max-width:40%;min-width:260px;position:relative;z-index:2}
+.card-visual{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:18px;border:1px solid rgba(255,255,255,0.03)}
 .neon-bar{height:6px;background:linear-gradient(90deg,#ff2d55,#ff6b6b);border-radius:6px;margin-bottom:12px;box-shadow:0 6px 30px rgba(255,45,85,0.08)}
 .visual-list{display:flex;flex-direction:column;gap:10px}
 .visual-row{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;border-radius:10px;background:linear-gradient(90deg,rgba(255,255,255,0.01),transparent)}
 
 /* FEATURES */
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px;position:relative;z-index:2}
 .feat{background:rgba(255,255,255,0.03);padding:18px;border-radius:14px;color:#fff}
 
 /* FOOTER */
-footer{padding:28px 0;text-align:center;color:#9aa0a6;margin-top:40px}
+footer{padding:28px 0;text-align:center;color:#9aa0a6;margin-top:40px;position:relative;z-index:2}
 
 /* ANIMATIONS */
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -136,6 +150,8 @@ footer{padding:28px 0;text-align:center;color:#9aa0a6;margin-top:40px}
 </head>
 
 <body>
+<div class="fire-bg" id="fire-bg"></div>
+
 <header class="site">
   <a class="logo" href="index.html">LEGA</a>
   <nav class="links">
@@ -154,7 +170,6 @@ footer{padding:28px 0;text-align:center;color:#9aa0a6;margin-top:40px}
       <a class="btn-buy" href="buy.html">Купить Алмазы</a>
       <div style="position:relative;width:max-content">
         <div class="smoke"></div>
-        <!-- рандомные искры -->
         <div class="spark" style="--x:120px;--y:-120px;top:50%;left:50%"></div>
         <div class="spark" style="--x:-140px;--y:-90px;top:50%;left:50%"></div>
         <div class="spark" style="--x:80px;--y:-150px;top:50%;left:50%"></div>
@@ -187,11 +202,24 @@ footer{padding:28px 0;text-align:center;color:#9aa0a6;margin-top:40px}
 </footer>
 
 <script>
+// HERO CARD ANIMATION
 document.addEventListener('DOMContentLoaded', ()=>{
   document.querySelectorAll('.card, .feat, .hero-left').forEach((el,i)=>{
     el.style.opacity=0; el.style.transform='translateY(8px)';
     setTimeout(()=>{el.style.transition='all .6s cubic-bezier(.2,.9,.2,1)';el.style.opacity=1;el.style.transform='translateY(0)';}, 80*i);
   });
+
+  // DYNAMIC FIRE PARTICLES
+  const fireBg = document.getElementById('fire-bg');
+  for(let i=0;i<60;i++){
+    let p=document.createElement('div'); p.className='particle';
+    p.style.left=Math.random()*100+'%';
+    p.style.top=Math.random()*100+'%';
+    p.style.width=(2+Math.random()*6)+'px';
+    p.style.height=p.style.width;
+    p.style.animationDuration=(3+Math.random()*4)+'s';
+    fireBg.appendChild(p);
+  }
 });
 </script>
 </body>
