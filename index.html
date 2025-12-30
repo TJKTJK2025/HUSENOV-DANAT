@@ -29,7 +29,7 @@ nav.links a:hover{background:linear-gradient(90deg,rgba(255,45,85,0.06),rgba(255
 .hero-left{flex:1;min-width:280px}
 h1.title{font-size:44px;color:#ff2d55;text-shadow:0 6px 30px rgba(255,45,85,0.12),0 0 40px rgba(255,107,107,0.06)}
 p.lead{margin-top:12px;color:#9aa0a6;max-width:720px}
-.cta{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+.cta{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap;position:relative}
 
 /* ===== BUTTONS ===== */
 .btn-buy{
@@ -43,16 +43,41 @@ p.lead{margin-top:12px;color:#9aa0a6;max-width:720px}
 }
 .btn-buy:hover{transform:scale(1.08);box-shadow:0 0 45px rgba(255,45,85,.9)}
 
-/* FIRE ORBIT BUTTON */
+/* ===== FIRE ORBIT BUTTON WITH DYNAMIC FIRE ===== */
 .btn-orbit{
-  position:relative;padding:20px 50px;border-radius:70px;background:#09040c;font-weight:900;letter-spacing:2px;text-transform:uppercase;overflow:hidden;box-shadow:0 0 30px rgba(255,80,0,.8);transition:.25s;
+  position:relative;
+  padding:20px 50px;
+  border-radius:70px;
+  background:#09040c;
+  font-weight:900;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  overflow:hidden;
+  box-shadow:0 0 30px rgba(255,80,0,.8);
+  transition:.25s;
+  z-index:1;
+  color:#fff;
+  text-align:center;
 }
-.btn-orbit::before{
-  content:"";position:absolute;inset:-8px;border-radius:inherit;background:conic-gradient(#ff2400,#ff7a00,#ffd000,#ff7a00,#ff2400);animation:spin 3s linear infinite;filter:blur(3px);z-index:-2;
-}
-.btn-orbit::after{content:"";position:absolute;inset:6px;border-radius:inherit;background:#09040c;z-index:-1;}
 .btn-orbit:hover{transform:scale(1.15);box-shadow:0 0 80px #ff7a00;}
-.btn-orbit:hover::before{animation-duration:.7s}
+
+/* 🔥 DYNAMIC FIRE LAYER */
+.btn-orbit::before{
+  content:"";
+  position:absolute;inset:-8px;
+  border-radius:inherit;
+  background:conic-gradient(#ff2400,#ff7a00,#ffd000,#ff7a00,#ff2400);
+  animation:spin 3s linear infinite;
+  filter:blur(3px);
+  z-index:-2;
+}
+.btn-orbit::after{
+  content:"";
+  position:absolute;inset:6px;
+  border-radius:inherit;
+  background:#09040c;
+  z-index:-1;
+}
 
 /* GLITCH */
 .glitch{position:relative}
@@ -61,8 +86,19 @@ p.lead{margin-top:12px;color:#9aa0a6;max-width:720px}
 .glitch::after{color:#00fff9;animation:g2 2.4s infinite alternate-reverse}
 
 /* SMOKE */
-.smoke{position:absolute;bottom:-60px;left:50%;width:160px;height:160px;background:radial-gradient(circle,rgba(200,200,200,.35),transparent 70%);filter:blur(35px);animation:smoke 5s infinite}
-.spark{position:absolute;width:4px;height:4px;background:#ffd000;border-radius:50%;animation:spark 1.5s infinite}
+.smoke{
+  position:absolute;bottom:-50px;left:50%;
+  width:160px;height:160px;
+  background:radial-gradient(circle,rgba(200,200,200,.35),transparent 70%);
+  filter:blur(35px);
+  animation:smoke 4s infinite;
+  z-index:-3;
+}
+.spark{
+  position:absolute;width:4px;height:4px;background:#ffd000;border-radius:50%;
+  animation:spark 1.5s infinite;
+  z-index:2;
+}
 
 /* HERO RIGHT CARD */
 .hero-right{width:420px;max-width:40%;min-width:260px}
@@ -91,9 +127,6 @@ footer{padding:28px 0;text-align:center;color:#9aa0a6;margin-top:40px}
 </head>
 
 <body>
-<div class="bg-aurora"></div>
-<div class="scanlines"></div>
-
 <header class="site">
   <a class="logo" href="index.html">LEGA</a>
   <nav class="links">
@@ -104,39 +137,38 @@ footer{padding:28px 0;text-align:center;color:#9aa0a6;margin-top:40px}
 </header>
 
 <main class="container">
-  <section class="hero">
-    <div class="hero-left">
-      <h1 class="title">LEGA DANAT — Донаты В Игре Free Fire 💎</h1>
-      <p class="lead">Покупайте Алмазы Со Скоростью Света! Оплатили? Отправьте Чек Администратору В Тг И После 5 Мин Вам Придут Алмазы! <strong>@idrisjon</strong> Гарантия Есть!</p>
-      <div class="cta buttons">
-        <a class="btn-buy" href="buy.html">Купить Алмазы</a>
-
-        <div style="position:relative">
-          <div class="smoke"></div>
-          <div class="spark" style="--x:120px;--y:-120px;top:50%;left:50%"></div>
-          <div class="spark" style="--x:-120px;--y:-100px;top:50%;left:50%"></div>
-          <a href="imadji-benzo.html" class="btn-orbit glitch" data-text="HAYMER Нажми! 🚀">HAYMER Нажми! 🚀</a>
-        </div>
+<section class="hero">
+  <div class="hero-left">
+    <h1 class="title">LEGA DANAT — Донаты В Игре Free Fire 💎</h1>
+    <p class="lead">Покупайте Алмазы Со Скоростью Света! Оплатили? Отправьте Чек Администратору В Тг И После 5 Мин Вам Придут Алмазы! <strong>@idrisjon</strong> Гарантия Есть!</p>
+    <div class="cta buttons">
+      <a class="btn-buy" href="buy.html">Купить Алмазы</a>
+      <div style="position:relative">
+        <div class="smoke"></div>
+        <div class="spark" style="--x:120px;--y:-120px;top:50%;left:50%"></div>
+        <div class="spark" style="--x:-120px;--y:-100px;top:50%;left:50%"></div>
+        <a href="imadji-benzo.html" class="btn-orbit glitch" data-text="HAYMER Нажми! 🚀">HAYMER Нажми! 🚀</a>
       </div>
     </div>
+  </div>
 
-    <aside class="hero-right">
-      <div class="card-visual">
-        <div class="neon-bar"></div>
-        <div class="visual-list">
-          <div class="visual-row"><strong>Пакет</strong><span>От 100 До 2000 алмаз</span></div>
-          <div class="visual-row"><strong>Скорость</strong><span>5–30 Мин От Отправки Чека!</span></div>
-          <div class="visual-row"><strong>Поддержка</strong><span><a href="https://t.me/idrisjon">@idrisjon</a></span></div>
-        </div>
+  <aside class="hero-right">
+    <div class="card-visual">
+      <div class="neon-bar"></div>
+      <div class="visual-list">
+        <div class="visual-row"><strong>Пакет</strong><span>От 100 До 2000 алмаз</span></div>
+        <div class="visual-row"><strong>Скорость</strong><span>5–30 Мин От Отправки Чека!</span></div>
+        <div class="visual-row"><strong>Поддержка</strong><span><a href="https://t.me/idrisjon">@idrisjon</a></span></div>
       </div>
-    </aside>
-  </section>
+    </div>
+  </aside>
+</section>
 
-  <section class="features">
-    <div class="feat card"><h3>Быстро!</h3><p>Покупка За 3 Шагов!</p></div>
-    <div class="feat card"><h3>Безопасно!</h3><p>Гарантия на Алмазы 100%</p></div>
-    <div class="feat card"><h3>Стиль киберпанк</h3><p>Неоновый интерфейс + огонь!</p></div>
-  </section>
+<section class="features">
+  <div class="feat card"><h3>Быстро!</h3><p>Покупка За 3 Шагов!</p></div>
+  <div class="feat card"><h3>Безопасно!</h3><p>Гарантия на Алмазы 100%</p></div>
+  <div class="feat card"><h3>Стиль киберпанк</h3><p>Неоновый интерфейс + огонь!</p></div>
+</section>
 </main>
 
 <footer>
@@ -151,6 +183,5 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 });
 </script>
-
 </body>
 </html>
