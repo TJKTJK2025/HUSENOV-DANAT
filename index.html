@@ -69,6 +69,117 @@
     .title::after{content:"";display:block;height:6px;width:120px;background:linear-gradient(90deg,transparent,var(--neon-2),transparent);margin-top:12px;border-radius:6px;animation:glow 2.6s infinite}
     @keyframes glow{0%{opacity:0.15;transform:translateX(-10px)}50%{opacity:1;transform:translateX(0)}100%{opacity:0.15;transform:translateX(10px)}}
     <style>
+    .btn-orbit{
+  position: relative;
+  display: inline-block;
+  padding: 18px 46px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color:#fff;
+  text-decoration:none;
+  border-radius:60px;
+  background:#07030a;
+  overflow:hidden;
+  z-index:1;
+  box-shadow:
+    0 0 18px rgba(255,60,0,.6),
+    0 0 45px rgba(255,0,0,.35);
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+
+/* 🔄 ВРАЩАЮЩЕЕСЯ НЕОНОВОЕ КОЛЬЦО */
+.btn-orbit::before{
+  content:"";
+  position:absolute;
+  inset:-4px;
+  border-radius:inherit;
+  background:conic-gradient(
+    transparent 0%,
+    #ff2a00 20%,
+    #ff9900 40%,
+    #ff2a00 60%,
+    transparent 80%
+  );
+  animation: orbit 4s linear infinite;
+  z-index:-1;
+  filter:blur(1.2px);
+}
+
+/* ВНУТРЕННИЙ СЛОЙ */
+.btn-orbit::after{
+  content:"";
+  position:absolute;
+  inset:3px;
+  background:#07030a;
+  border-radius:inherit;
+  z-index:-1;
+}
+
+/* ⚡ УСКОРЕНИЕ + МОЩНЫЙ СВЕТ */
+.btn-orbit:hover{
+  transform: scale(1.12);
+  box-shadow:
+    0 0 30px #ff9900,
+    0 0 90px #ff3300;
+}
+.btn-orbit:hover::before{
+  animation-duration: .9s; /* ускорение */
+}
+
+/* 🌀 GLITCH ТЕКСТ */
+.glitch{
+  position:relative;
+}
+.glitch::before,
+.glitch::after{
+  content:attr(data-text);
+  position:absolute;
+  left:0;
+  top:0;
+  width:100%;
+  text-align:center;
+  color:#fff;
+  background:transparent;
+  overflow:hidden;
+  pointer-events:none;
+}
+
+.glitch::before{
+  text-shadow:-2px 0 #ff004c;
+  animation:glitch1 2.2s infinite linear alternate-reverse;
+}
+
+.glitch::after{
+  text-shadow:2px 0 #00fff9;
+  animation:glitch2 2.8s infinite linear alternate-reverse;
+}
+
+@keyframes orbit{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+/* GLITCH KEYFRAMES */
+@keyframes glitch1{
+  0%{clip-path:inset(0 0 90% 0)}
+  20%{clip-path:inset(10% 0 80% 0)}
+  40%{clip-path:inset(30% 0 50% 0)}
+  60%{clip-path:inset(50% 0 30% 0)}
+  80%{clip-path:inset(80% 0 10% 0)}
+  100%{clip-path:inset(0 0 90% 0)}
+}
+
+@keyframes glitch2{
+  0%{clip-path:inset(80% 0 0 0)}
+  20%{clip-path:inset(60% 0 20% 0)}
+  40%{clip-path:inset(40% 0 40% 0)}
+  60%{clip-path:inset(20% 0 60% 0)}
+  80%{clip-path:inset(0 0 80% 0)}
+  100%{clip-path:inset(80% 0 0 0)}
+}
+
 .btn-dynamic {
   position: relative;
   margin-top: 35px;
@@ -184,12 +295,8 @@
         <p class="lead">Покупайте Алмазы Со Скоростью Света!. Оплатили? Отправьте Чек Администратору В Тг И После 5 Мин Вам Придут Алмазы! <strong>@idrisjon</strong> Гарантия Есть!</p>
         <div class="cta">
           <a class="btn" href="buy.html">Купить Алмазы</a>
-          <a href="imadji-benzo.html" class="btn-dynamic">
-          HAYMER Нажми!🚀 
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+          <a href="imadji-benzo.html" class="btn-orbit glitch" data-text="HAYMER Нажми! 🚀">
+          HAYMER Нажми! 🚀
           </a>
         </div>
       </div>
@@ -227,6 +334,7 @@
   </script>
 </body>
 </html>
+
 
 
 
