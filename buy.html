@@ -18,16 +18,55 @@
     nav a{margin-left:16px;opacity:.75}
     nav a:hover{opacity:1}
 
-    .card{background:var(--panel);padding:20px;border-radius:14px;max-width:600px;margin:0 auto;border:1px solid rgba(255,255,255,0.04)}
+    .card{
+      background:var(--panel);
+      padding:20px;
+      border-radius:14px;
+      max-width:600px;
+      margin:0 auto;
+      border:1px solid rgba(255,255,255,0.04)
+    }
+
     h2{margin-bottom:12px;color:var(--neon)}
     label{display:block;margin-top:14px;font-size:14px;color:var(--muted)}
-    input,select{width:100%;padding:12px;margin-top:6px;border-radius:10px;border:1px solid rgba(255,255,255,0.05);background:transparent;color:#fff}
-    textarea{width:100%;padding:12px;margin-top:6px;height:140px;border-radius:10px;background:#07070b;border:1px solid rgba(255,255,255,0.05);color:#fff}
-    .btn{margin-top:14px;padding:14px 18px;border-radius:12px;border:none;width:100%;background:linear-gradient(90deg,var(--neon),var(--neon2));color:#fff;font-weight:700;font-size:16px;cursor:pointer}
-    .btn:hover{opacity:.9}
 
-    .result{margin-top:20px}
+    input,select{
+      width:100%;
+      padding:12px;
+      margin-top:6px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.05);
+      background:transparent;
+      color:#fff
+    }
+
+    textarea{
+      width:100%;
+      padding:12px;
+      margin-top:6px;
+      height:140px;
+      border-radius:10px;
+      background:#07070b;
+      border:1px solid rgba(255,255,255,0.05);
+      color:#fff
+    }
+
+    .btn{
+      margin-top:14px;
+      padding:14px 18px;
+      border-radius:12px;
+      border:none;
+      width:100%;
+      background:linear-gradient(90deg,var(--neon),var(--neon2));
+      color:#fff;
+      font-weight:700;
+      font-size:16px;
+      cursor:pointer
+    }
+
+    .btn:hover{opacity:.9}
     .price{margin-top:14px;font-size:16px;color:var(--neon2);font-weight:700}
+    .result{margin-top:20px}
   </style>
 </head>
 <body>
@@ -45,7 +84,7 @@
   <h2>Покупка алмазов</h2>
 
   <label>Ваш ID в Free Fire:</label>
-  <input id="ffid" type="text" placeholder="Например: 123456789" />
+  <input id="ffid" type="text" placeholder="Например: 123456789">
 
   <label>Выберите пакет алмазов:</label>
   <select id="pack" onchange="updatePrice()">
@@ -68,62 +107,55 @@
   <div class="price" id="price">Цена: 10 сомони</div>
 
   <label>Сообщение администратору (необязательно):</label>
-  <input id="msg" type="text" placeholder="Напишите сообщение, если нужно" />
+  <input id="msg" type="text" placeholder="Комментарий к заказу">
 
   <button class="btn" onclick="sendToTG()">Оформить заказ</button>
 
   <div class="result">
-    <label>Ваш заказ для отправки:</label>
+    <label>Текст заказа:</label>
     <textarea id="output" readonly></textarea>
   </div>
 </div>
 
 <script>
 function updatePrice(){
-  let pack = document.getElementById('pack').value;
-  let priceText = 'Цена: ';
-  switch(pack){
-    case '100': priceText += '10 сомони'; break;
-    case '200': priceText += '20 сомони'; break;
-    case '300': priceText += '30 сомони'; break;
-    case '400': priceText += '40 сомони'; break;
-    case '500': priceText += '50 сомони'; break;
-    case '1000': priceText += '100 сомони'; break;
-    case '2000': priceText += '200 сомони'; break;
-    case '1': priceText += '10 сомони'; break;
-    case '2': priceText += '15 сомони'; break;
-    case '3': priceText += '110 сомони'; break;
-    case '4': priceText += '8 сомони'; break;
-    case '5': priceText += '10 сомони'; break;
-    case '6': priceText += '30 сомони'; break;
-    case '7': priceText += '30 сомони'; break;
-    default: priceText += '—';
-  }
-  document.getElementById('price').textContent = priceText;
+  const prices = {
+    100:"10",200:"20",300:"30",400:"40",500:"50",
+    1000:"100",2000:"200",1:"10",2:"15",3:"110",
+    4:"8",5:"10",6:"30",7:"30"
+  };
+  let pack = packSelect().value;
+  document.getElementById("price").textContent =
+    "Цена: " + (prices[pack] || "—") + " сомони";
+}
+
+function packSelect(){
+  return document.getElementById("pack");
 }
 
 function sendToTG(){
-  let id = document.getElementById('ffid').value.trim();
-  let pack = document.getElementById('pack').value;
-  let msg = document.getElementById('msg').value.trim();
-
+  let id = ffid.value.trim();
   if(id.length < 3){
-    alert('Пожалуйста, введите корректный ID!');
+    alert("Введите корректный ID");
     return;
   }
 
-  let text = `🛒 *НОВЫЙ ЗАКАЗ*
+  let text =
+`🛒 НОВЫЙ ЗАКАЗ
 ━━━━━━━━━━━━━━
 🎮 ID: ${id}
-💎 Пакет: ${pack}
-📝 Сообщение: ${msg || '—'}
+💎 Пакет: ${packSelect().options[packSelect().selectedIndex].text}
+📝 Сообщение: ${msg.value || "—"}
 ━━━━━━━━━━━━━━
-Отправлено с сайта LEGA`;
+Админ: @davlatow18`;
 
-  document.getElementById('output').value = text;
+  output.value = text;
 
   let encoded = encodeURIComponent(text);
-  window.open(`https://t.me/davlatow18?text=${encoded}`, '_blank');
+  window.open(
+    "https://t.me/share/url?text=" + encoded,
+    "_blank"
+  );
 }
 </script>
 
