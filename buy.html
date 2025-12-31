@@ -49,20 +49,20 @@
 
   <label>Выберите пакет алмазов:</label>
   <select id="pack" onchange="updatePrice()">
-    <option value="100" style="color:#000;">100💎</option>
-    <option value="200" style="color:#000;">200💎</option>
-    <option value="300" style="color:#000;">300💎</option>
-    <option value="400" style="color:#000;">400💎</option>
-    <option value="500" style="color:#000;">500💎</option>
-    <option value="1000" style="color:#000;">1000💎</option>
-    <option value="2000" style="color:#000;">2000💎</option>
-    <option value="1" style="color:#000;">Ваучер Lite 🎟️</option>
-    <option value="2" style="color:#000;">Ваучер на неделю 🎫</option>
-    <option value="3" style="color:#000;">Ваучер на месяц 🎫</option>
-    <option value="4" style="color:#000;">Evo-пропуск на 3 дня 🏷️</option>
-    <option value="5" style="color:#000;">Evo-пропуск на 7 дней 🏷️</option>
-    <option value="6" style="color:#000;">Evo-пропуск на 30 дней 🏷️</option>
-    <option value="7" style="color:#000;">BOOYAH! Пропуск 🔑</option>
+    <option value="100">100💎</option>
+    <option value="200">200💎</option>
+    <option value="300">300💎</option>
+    <option value="400">400💎</option>
+    <option value="500">500💎</option>
+    <option value="1000">1000💎</option>
+    <option value="2000">2000💎</option>
+    <option value="1">Ваучер Lite 🎟️</option>
+    <option value="2">Ваучер на неделю 🎫</option>
+    <option value="3">Ваучер на месяц 🎫</option>
+    <option value="4">Evo-пропуск на 3 дня 🏷️</option>
+    <option value="5">Evo-пропуск на 7 дней 🏷️</option>
+    <option value="6">Evo-пропуск на 30 дней 🏷️</option>
+    <option value="7">BOOYAH! Пропуск 🔑</option>
   </select>
 
   <div class="price" id="price">Цена: 10 сомони</div>
@@ -118,7 +118,7 @@ function sendToTG(){
 💎 Пакет: ${pack}
 📝 Сообщение: ${msg || '—'}
 ━━━━━━━━━━━━━━
-Отправлено с сайта HUSENOV`;
+Отправлено с сайта LEGA`;
 
   document.getElementById('output').value = text;
 
@@ -129,4 +129,3 @@ function sendToTG(){
 
 </body>
 </html>
-
